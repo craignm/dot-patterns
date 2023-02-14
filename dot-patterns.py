@@ -46,7 +46,7 @@ G1 Z-11 F508
 """.format(x=x, y=1800 - y))
 
 def coordinate_key(coordinate):
-    return coordinate['y'] * 48 + coordinate['x']
+    return math.floor(coordinate['y'] / 12.5) * 48 + coordinate['x'] / 12.5
 
 def cnc_write(name):
     with open(name + '.nc', "w") as f:
@@ -77,6 +77,7 @@ def write_pattern(name):
     coordinates = []
 
 # Speaker grille
+coordinates.append({'x': 300, 'y': 900})
 for radius in range(1, 40):
     for dot in range(0, radius * 6):
         theta = 2 * math.pi * dot / (radius * 6)
